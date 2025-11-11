@@ -9,7 +9,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://your-backend-url/api/auth/login", { email, password });
+      const res = await axios.post("https://campusconnect-2r6u.onrender.com/api/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
       setMsg("✅ Login successful!");
     } catch {
