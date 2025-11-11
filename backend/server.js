@@ -19,3 +19,10 @@ app.listen(5000, () => console.log("Server running on port 5000"));
 import authRoutes from "./routes/auth.js";
 app.use("/api/auth", authRoutes);
 
+import courseRoutes from "./routes/course.js";
+import studentRoutes from "./routes/student.js";
+
+app.use("/api/courses", courseRoutes);
+app.use("/api/student", studentRoutes);
+
+
