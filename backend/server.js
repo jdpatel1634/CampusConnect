@@ -2,6 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import authRoutes from "./routes/auth.js";
+import courseRoutes from "./routes/course.js";
+import studentRoutes from "./routes/student.js";
 
 dotenv.config();
 const app = express();
@@ -21,11 +24,8 @@ app.listen(PORT, function () {
 
 
 
-import authRoutes from "./routes/auth.js";
 app.use("/api/auth", authRoutes);
 
-import courseRoutes from "./routes/course.js";
-import studentRoutes from "./routes/student.js";
 
 app.use("/api/courses", courseRoutes);
 app.use("/api/student", studentRoutes);
