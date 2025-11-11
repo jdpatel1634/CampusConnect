@@ -9,7 +9,7 @@ export default function Dashboard() {
   // ✅ Define fetch functions first and wrap in useCallback
   const fetchCourses = useCallback(async () => {
     const res = await axios.get(
-      "https://student-portal-backend.onrender.com/api/courses"
+      "https://campusconnect-2r6u.onrender.com/api/courses"
     );
     setCourses(res.data);
   }, []);
