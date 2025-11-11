@@ -10,7 +10,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://student-portal-backend.onrender.com/api/auth/login",
+        "https://campusconnect-2r6u.onrender.com/api/auth/login",
         { email, password }
       );
       localStorage.setItem("token", res.data.token);
@@ -73,3 +73,4 @@ export default function Login() {
     </div>
   );
 }
+

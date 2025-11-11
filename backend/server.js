@@ -25,4 +25,8 @@ import studentRoutes from "./routes/student.js";
 app.use("/api/courses", courseRoutes);
 app.use("/api/student", studentRoutes);
 
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running on port ${process.env.PORT || 5000}`);
+});
+
 

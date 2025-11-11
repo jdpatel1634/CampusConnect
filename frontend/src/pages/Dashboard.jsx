@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   const fetchMyCourses = useCallback(async () => {
     const res = await axios.get(
-      "https://student-portal-backend.onrender.com/api/student/mycourses",
+      "https://campusconnect-2r6u.onrender.com/api/student/mycourses",
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -26,7 +26,7 @@ export default function Dashboard() {
 
   const enroll = async (id) => {
     await axios.post(
-      "https://student-portal-backend.onrender.com/api/student/enroll",
+      "https://campusconnect-2r6u.onrender.com/api/student/enroll",
       { courseId: id },
       { headers: { Authorization: `Bearer ${token}` } }
     );
