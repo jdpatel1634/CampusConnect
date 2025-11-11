@@ -6,31 +6,30 @@ export default function Dashboard() {
   const [myCourses, setMyCourses] = useState([]);
   const token = localStorage.getItem("token");
 
-  // Fetch data when component loads
   useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const res = await axios.get("https://campusconnect-2r6u.onrender.com/api/courses");
+        setCourses(res.data);
+      } catch (err) {
+        console.error("Error fetching courses:", err);
+      }
+    };
+
+    const fetchMyCourses = async () => {
+      try {
+        const res = await axios.get("https://campusconnect-2r6u.onrender.com/api/student/mycourses", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setMyCourses(res.data);
+      } catch (err) {
+        console.error("Error fetching my courses:", err);
+      }
+    };
+
     fetchCourses();
     fetchMyCourses();
-  }, []);
-
-  const fetchCourses = async () => {
-    try {
-      const res = await axios.get("https://campusconnect-2r6u.onrender.com/api/courses");
-      setCourses(res.data);
-    } catch (err) {
-      console.error("Error fetching courses:", err);
-    }
-  };
-
-  const fetchMyCourses = async () => {
-    try {
-      const res = await axios.get("https://campusconnect-2r6u.onrender.com/api/student/mycourses", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setMyCourses(res.data);
-    } catch (err) {
-      console.error("Error fetching my courses:", err);
-    }
-  };
+  }, [token]); // only runs when token changes
 
   const enroll = async (courseId) => {
     try {
@@ -39,7 +38,11 @@ export default function Dashboard() {
         { courseId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      fetchMyCourses(); // refresh enrolled list
+      // refresh enrolled list
+      const res = await axios.get("https://campusconnect-2r6u.onrender.com/api/student/mycourses", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setMyCourses(res.data);
     } catch (err) {
       console.error("Enrollment failed:", err);
     }
