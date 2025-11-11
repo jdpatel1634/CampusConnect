@@ -13,7 +13,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "https://your-backend-url/api/auth/login",  // ⬅️ replace with your Render backend URL
+        "https://campusconnect-2r6u.onrender.com/api/auth/login",  // ⬅️ replace with your Render backend URL
         { email, password }
       );
 
