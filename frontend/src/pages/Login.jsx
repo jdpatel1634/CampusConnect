@@ -9,23 +9,67 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://campusconnect-2r6u.onrender.com/api/auth/login", { email, password });
+      const res = await axios.post(
+        "https://student-portal-backend.onrender.com/api/auth/login",
+        { email, password }
+      );
       localStorage.setItem("token", res.data.token);
       setMsg("✅ Login successful!");
-    } catch {
+    } catch (err) {
       setMsg("❌ Invalid credentials");
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <form onSubmit={handleLogin} className="bg-white p-8 shadow-md rounded">
-        <h2 className="text-2xl mb-4">Login</h2>
-        <input className="border p-2 mb-2 w-full" placeholder="Email" onChange={e=>setEmail(e.target.value)} />
-        <input className="border p-2 mb-2 w-full" type="password" placeholder="Password" onChange={e=>setPassword(e.target.value)} />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
-        <p className="mt-2">{msg}</p>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
+        <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">
+          Login
+        </h2>
+
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              placeholder="you@example.com"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              placeholder="********"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition duration-200"
+          >
+            Login
+          </button>
+        </form>
+
+        {msg && (
+          <p
+            className={`mt-4 text-center ${
+              msg.includes("Invalid") ? "text-red-500" : "text-green-600"
+            }`}
+          >
+            {msg}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
