@@ -18,7 +18,7 @@ const PORT = 5000;
 
 app.listen(PORT, function () {
   console.log("Server running on port 5000");
-});
+
 
 
 import authRoutes from "./routes/auth.js";
