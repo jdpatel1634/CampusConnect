@@ -62,13 +62,15 @@ export default function Login() {
           Login
         </button>
 
-        {msg && <p className="mt-3 text-center text-sm">{msg}</p>}
-        <p className="mt-3 text-sm text-center">
+        import { Link } from "react-router-dom";
+
+<p className="mt-3 text-sm text-center">
   Don’t have an account?{" "}
-  <a href="/signup" className="text-blue-600 hover:underline">
+  <Link to="/signup" className="text-blue-600 hover:underline">
     Sign Up
-  </a>
+  </Link>
 </p>
+
 
       </form>
     </div>
