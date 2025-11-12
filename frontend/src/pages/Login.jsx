@@ -8,6 +8,10 @@ export default function Login() {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = "Campus Connect";
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
