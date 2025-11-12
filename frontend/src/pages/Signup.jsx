@@ -8,7 +8,9 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
-
+useEffect(() => {
+    document.title = "Campus Connect";
+  }, []);
   const handleSignup = async (e) => {
     e.preventDefault();
 
