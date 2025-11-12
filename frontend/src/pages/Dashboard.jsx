@@ -7,6 +7,10 @@ export default function Dashboard() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    document.title = "Campus Connect";
+  }, []);
+
+  useEffect(() => {
     const fetchCourses = async () => {
       try {
         const res = await axios.get("https://campusconnect-2r6u.onrender.com/api/courses");
