@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -11,17 +11,22 @@ export default function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
     try {
-      await axios.post("https://campusconnect-2r6u.onrender.com", {
-        name,
-        email,
-        password,
-      });
-      setMsg("✅ Account created successfully! Redirecting...");
-      setTimeout(() => navigate("/"), 1500); // redirect to login
+      const res = await axios.post(
+        "https://campusconnect-2r6u.onrender.com/api/auth/signup", // ✅ your backend signup route
+        { name, email, password }
+      );
+
+      setMsg("✅ Account created successfully! Redirecting to login...");
+      setTimeout(() => navigate("/"), 1500); // Redirect after 1.5s
     } catch (err) {
       console.error(err);
-      setMsg("❌ Error: account may already exist");
+      if (err.response?.data?.message) {
+        setMsg(`❌ ${err.response.data.message}`);
+      } else {
+        setMsg("❌ Failed to create account. Try again.");
+      }
     }
   };
 
@@ -29,41 +34,52 @@ export default function Signup() {
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <form
         onSubmit={handleSignup}
-        className="bg-white shadow-md rounded p-8 w-80"
+        className="bg-white p-8 shadow-md rounded w-80"
       >
-        <h2 className="text-2xl mb-4 text-center font-semibold">Create Account</h2>
+        <h2 className="text-2xl mb-4 text-center font-semibold">Sign Up</h2>
+
         <input
           className="border p-2 mb-3 w-full rounded"
+          type="text"
           placeholder="Full Name"
+          value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
+
         <input
           className="border p-2 mb-3 w-full rounded"
+          type="email"
           placeholder="Email"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
         <input
-          type="password"
           className="border p-2 mb-3 w-full rounded"
+          type="password"
           placeholder="Password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 w-full rounded hover:bg-blue-700"
+          className="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700"
         >
-          Sign Up
+          Create Account
         </button>
+
         <p className="mt-3 text-sm text-center">
           Already have an account?{" "}
-          <a href="/" className="text-blue-600 hover:underline">
+          <Link to="/" className="text-blue-600 hover:underline">
             Login
-          </a>
+          </Link>
         </p>
-        <p className="mt-3 text-center">{msg}</p>
+
+        {msg && <p className="mt-3 text-center text-sm">{msg}</p>}
       </form>
     </div>
   );
