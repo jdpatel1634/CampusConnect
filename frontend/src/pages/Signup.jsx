@@ -12,7 +12,7 @@ export default function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://student-portal-backend.onrender.com/api/auth/register", {
+      await axios.post("https://campusconnect-2r6u.onrender.com", {
         name,
         email,
         password,
