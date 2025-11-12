@@ -13,9 +13,9 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "https://campusconnect-2r6u.onrender.com/api/auth/signup", // ✅ your backend signup route
-        { name, email, password }
+      await axios.post(
+  "https://campusconnect-2r6u.onrender.com/api/auth/signup",
+  { name, email, password }
       );
 
       setMsg("✅ Account created successfully! Redirecting to login...");
