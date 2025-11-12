@@ -14,8 +14,9 @@ export default function Signup() {
 
     try {
       await axios.post(
-  "https://campusconnect-2r6u.onrender.com/api/auth/signup",
+  "https://campusconnect-2r6u.onrender.com/api/auth/register",
   { name, email, password }
+
       );
 
       setMsg("✅ Account created successfully! Redirecting to login...");
